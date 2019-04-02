@@ -3,9 +3,12 @@ using Core.Data.Infrastructure;
 using Core.Data.Model.Infrastructure;
 using Dapper;
 using Dapper.Contrib.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Core.Data.Base.Dapper
 {
@@ -26,78 +29,104 @@ namespace Core.Data.Base.Dapper
             _context = new DCON();
         }
 
+        public T Add(T t)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<T> AddAsyn(T t)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public void BulkInsert(List<T> items)
         {
-            using (var connection = _context.GetConnection)
-            {
-                connection.Open();
-                connection.Insert(items);
-            }
+            throw new System.NotImplementedException();
         }
 
-        public void Delete(T item)
+        public int Count()
         {
-            using (var connection = _context.GetConnection)
-            {
-                connection.Open();
-                var identity = connection.Delete(item);
-            }
+            throw new NotImplementedException();
         }
 
-        public List<T> GetBy(string query,object parameters)
+        public void Delete(T entity)
         {
-            using (var connection = _context.GetConnection)
-            {
-                var list = connection.Query<T>(query,parameters).ToList();
-                return list;
-            }
+            throw new System.NotImplementedException();
         }
 
-        public List<T> GetAll()
+        public Task<int> DeleteAsyn(T entity)
         {
-            using (var connection = _context.GetConnection)
-            {
-                var list = connection.GetAll<T>().ToList();
-                return list;
-            }
+            throw new System.NotImplementedException();
         }
+
         public bool ExecuteQuery(string query, object param = null)
         {
-                using (var connection = _context.GetConnection)
-                {
-                connection.Execute(query, param);
-                return true;
-                }
+            throw new System.NotImplementedException();
         }
 
-        public List<T> GetByStoredProcedure(string query, object param = null)
+        public T Find(Expression<Func<T, bool>> match)
         {
-            using (var connection = _context.GetConnection)
-            {
-                var result = connection.Query<T>(query, param, null, true, null, CommandType.StoredProcedure).ToList();
-                return result;
-            }
-        }
-        public T Update(T item)
-        {
-            using (var connection = _context.GetConnection)
-            {
-                connection.Open();
-                var identity = connection.Update(item);
-                return item;
-            }
+            throw new NotImplementedException();
         }
 
-        public T Insert(T item)
+        public ICollection<T> FindAll(Expression<Func<T, bool>> match)
         {
-            using (var connection = _context.GetConnection)
-            {
-                connection.Open();
-                var identity = connection.Insert(item);
-                typeof(T).GetProperty("ID").SetValue(item, identity);
-                return item;
-            }
+            throw new NotImplementedException();
         }
 
+        public Task<ICollection<T>> FindAllAsync(Expression<Func<T, bool>> match)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<T> FindAsync(Expression<Func<T, bool>> match)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IQueryable<T> FindBy(Expression<Func<T, bool>> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ICollection<T>> FindByAsyn(Expression<Func<T, bool>> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public T Get(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IQueryable<T> GetAll()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<ICollection<T>> GetAllAsyn()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IQueryable<T> GetAllIncluding(params Expression<Func<T, object>>[] includeProperties)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<T> GetAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public T Update(T t, object key)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<T> UpdateAsyn(T t, object key)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

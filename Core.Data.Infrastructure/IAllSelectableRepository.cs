@@ -11,6 +11,7 @@ namespace Core.Data.Infrastructure
     public interface IAllSelectableRepository<T> :
        IRepository<T> where T : class, IEntity
     {
-        List<T> GetAll();
+        IQueryable<T> GetAll();
+        Task<ICollection<T>> GetAllAsyn();
     }
 }
